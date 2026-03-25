@@ -45,35 +45,7 @@ VIDEO DEMO HERE
 ***RUBRIC NOTE: No external libraries are required. Therefore, a requirements.txt file is not strictly necessary for dependency installation, though one might be included for environment completeness.***
 
 ## 5. Step-by-Step Run Guide
-### 1. Confirm the project structure
-Make sure the following folders exist:
-
-```text
-client_files/
-server_files/
-shared/
-```
-
-If `client_files/` or `server_files/` are missing, create them manually:
-
-```bash
-mkdir client_files
-mkdir server_files
-```
-
-On Windows Command Prompt:
-
-```cmd
-mkdir client_files
-mkdir server_files
-```
-
-### 4. No package installation is needed
-Since the project uses only Python standard library modules, there is no `pip install` step.
-
-## Step-by-Step Run Guide
-
-### Terminal 1: Start the server
+### 1. Start the server
 Open a terminal in the project folder and run:
 
 ```bash
@@ -94,7 +66,7 @@ Expected output:
 
 Keep this terminal open. The server must stay running while clients connect.
 
-### Terminal 2: Start one client
+### 2. Start one client
 Open a second terminal in the same project folder and run:
 
 ```bash
@@ -115,7 +87,7 @@ Expected output:
 
 The client will then show the available commands.
 
-## Client Commands
+### Client Commands
 Once the client is running, you can type the following commands:
 
 ```text
@@ -158,7 +130,7 @@ quit
 
 This disconnects the client only.
 
-## Running Multiple Clients
+### Running Multiple Clients
 You can open additional terminals and run more clients with the same command:
 
 ```bash
@@ -167,7 +139,7 @@ python3 client.py
 
 Each client can connect to the same server while the server is running.
 
-## How to Stop the Server
+### How to Stop the Server
 The server is designed to keep running after a client disconnects.
 
 To stop the server, go to the server terminal and press:
@@ -178,7 +150,7 @@ Ctrl + C
 
 That is the expected way to terminate the server in this version.
 
-## Example End-to-End Test
+### Example End-to-End Test
 A simple full test can be done like this:
 
 1. Start the server.
@@ -190,12 +162,7 @@ A simple full test can be done like this:
 7. Run `quit`.
 8. Stop the server with `Ctrl + C`.
 
-## Communication Protocol
-The client and server communicate using newline-terminated text commands for control messages and raw bytes for file transfer.
-
-
-
-## Limitations
+## 6. Limitations
 This project is a working file transfer system, but it has several limitations:
 
 1. **Localhost by default**  
@@ -222,51 +189,19 @@ This project is a working file transfer system, but it has several limitations:
 8. **No checksum verification**  
    The current version does not verify file integrity using hashing after transfer.
 
-## Questions or Issues That Could Come Up
-When running or testing this application, the following issues may come up:
+## 7. Technical Protocol Details (Custom Text Protocol over TCP)
+We designed a custom application-layer protocol for communication between the client and server using newline-terminated text commands over TCP, followed by raw byte streams for file data transfer.
+- **Control Message Format:** Plain text, one message in a line
+- **Handshake Phase:** Client connects to the server at `127.0.0.1:5001`
+- **Command Phase:** Client sends command such as: `list`, `upload <filename>`
+  Server responds `[STATUS] MESSAGE`
 
-- **"Connection refused"**  
-  This usually means the server is not running yet, or the host/port in `client.py` does not match the server.
-
-- **The client says a file does not exist**  
-  For upload, the file must be placed in the `client_files/` folder. The client only uploads files from that folder.
-
-- **The server says a file does not exist**  
-  For download, the requested file must already be inside the `server_files/` folder or uploaded there first.
-
-- **The server does not stop after the client quits**  
-  This is expected. `QUIT` only disconnects the client. The server keeps running and waits for the next connection. Stop the server manually with `Ctrl + C`.
-
-- **Port already in use**  
-  Another process may already be using port `5001`. In that case, either stop the other process or change the port number in both `server.py` and `client.py`.
-
-- **Path or filename problems**  
-  Only plain filenames should be used. The program sanitizes filenames using `os.path.basename()`.
-
-## Requirements
-This project uses only Python standard library modules:
-- `socket`
-- `threading`
-- `os`
-
-Because of that, **no external third-party libraries are required**.
-
-### requirements.txt
-A `requirements.txt` file is **not needed** for this project because there are no external packages to install.
-
-If your instructor strictly expects a `requirements.txt` file in every repo, it can be included as an empty file or with a comment such as:
-
-```text
-# No external dependencies required
-```
-
-## Fresh Environment Setup Guide
-These instructions assume a fresh environment.
-
-
-
-## Notes for Marker / Instructor
-- The server must be started before the client.
-- The client connects to `127.0.0.1` on port `5001`.
-- The application uses only Python standard library modules, so there are no external installation dependencies.
-- `QUIT` disconnects the client only; it does not shut down the server.
+## 8. Academic Integrity & References
+- #### GenAI Usage:
+  - ChatGPT was used used to assist in generating the code for file directory handling including checking the existentce of required directory and downloading/uploading files from correct file path.
+  - ChatGPT was used to help with `readme.md` syntax.
+  - Copilot was used to help with polishing the code and write comments.
+- #### References:
+  - [Python `socket`](https://docs.python.org/3/library/socket.html)
+  - [Python `threading`](https://docs.python.org/3/library/threading.html)
+  - [Python `os`](https://docs.python.org/3/library/os.html)
