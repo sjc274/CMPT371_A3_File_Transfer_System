@@ -6,7 +6,8 @@
 | Name      | Student ID | Email                         |
 |-----------|------------|-------------------------------|
 | Jiachen Sun  | 301436357  | [jsa356@sfu.ca](mailto:jsa356@sfu.ca) |
-| PLACEHOLDER|  PLACEHOLDER | [PLACEHOLDER](mailto:) |
+| Atulya Malhan|  301607963 | [ama367@sfu.ca](mailto:ama367@sfu.ca) |
+
 ## 1. Project Description
 This project is a TCP-based file transfer system implemented in Python. It follows a client-server architecture and allows a client to connect to a server, view the files available on the server, upload files to the server, download files from the server, and close the client connection safely.
 
