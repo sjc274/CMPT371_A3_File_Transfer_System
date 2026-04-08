@@ -35,7 +35,7 @@ The application uses TCP because file transfer requires reliable, ordered, and c
   Closes the client connection only. It does **not** shut down the server.
 
 ## 3. Video Demo
-VIDEO DEMO HERE
+[VIDEO DEMO HERE](https://www.loom.com/share/6477916222364835884429dd030ad781)
 
 ## 4. Technologies Used
 - Python 3
